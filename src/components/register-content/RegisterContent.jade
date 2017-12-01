@@ -1,0 +1,35 @@
+.login-content.row.center-xs.center-sm
+	.col-md-base
+		.row.center-xs
+			.col-xs-12
+				.text-field.fs-14
+					label.row(class="text-field-box")
+						input(:type="text",
+							class="pl-0",
+							:class="name",
+							:placeholder.once="name",
+							:id="name",
+							:name="name")
+			.col-xs-12
+				.text-field.fs-14
+					label.row(class="text-field-box")
+						input(:type="text",
+							class="pl-0",
+							:class="email",
+							:placeholder.once="email",
+							:id="email",
+							:name="email")
+			.col-xs-12
+				.text-field.fs-14
+					label.row(class="text-field-box")
+						input(:type="password",
+							class="pl-0",
+							:class="password",
+							:placeholder.once="password",
+							:id="password",
+							:name="password")
+			.row.col-sm-12.col-xs-12.center-sm.center-xs
+				button.nw-button(class="login-button")
+					| Sign up
+			.row.col-xs-12.fs-10.mt-s.mb-xl.center-xs.center-sm
+				a.global-border-button(v-link="link('/register')") Sign Up
