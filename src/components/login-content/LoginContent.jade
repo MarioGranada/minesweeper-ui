@@ -4,26 +4,27 @@
 			.col-xs-12
 				.text-field.fs-14
 					label.row(class="text-field-box")
-						input(:type="text",
+						input(type="mario",
 							class="pl-0",
-							:class="email",
-							:placeholder.once="email",
-							:id="email",
-							:name="email")
+							class="email",
+							placeholder.once="email",
+							id="email",
+							name="email",
+							v-model="email")
 			.col-xs-12
 				.text-field.fs-14
 					label.row(class="text-field-box")
-						input(:type="password",
+						input(type="password",
 							class="pl-0",
-							:class="password",
-							:placeholder.once="password",
-							:id="password",
-							:name="password")
+							class="password",
+							placeholder.once="password",
+							id="password",
+							name="password")
 			.row.col-sm-12.col-xs-12.center-sm.center-xs
-				button.nw-button(class="login-button")
+				button.nw-button(class="login-button", @click="signIn(email)")
 					| Sign in
 			.row.col-xs-12.fs-10.mt-s.mb-xl.center-xs.center-sm
 				.uppercase.main-color-text.text-center
 					| Forgot password?
 			.row.col-xs-12.fs-10.mt-s.mb-xl.center-xs.center-sm
-				a.global-border-button(v-link="link('/register')") Sign Up
+				router-link.global-border-button(:to="{path: '/register'}") Sign Up
