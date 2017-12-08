@@ -1,19 +1,25 @@
 import request from 'superagent'
 import Base from '../../services/base'
 
-const  methods = {
+const methods = {
 	signIn(email) {
 		request
 		.get(Base.BASE_ENDPOINTS + '/user_by_email/')
-		// .query({email: 'mandres190@hotmail.com'})
 		.query({email: email})
 		.end((err, res) => {
-        	// callback(err, res);
-        	console.log(res);
+        	console.log(res.body);
     	});
 	}
 }
 
+const data = function () {
+	return {
+		email: '',
+		password: ''
+	}
+}
+
 export default {
-	methods
+	methods,
+	data
 }

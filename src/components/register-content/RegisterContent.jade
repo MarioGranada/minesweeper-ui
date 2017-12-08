@@ -3,34 +3,31 @@
 		.row.center-xs
 			.col-xs-12
 				.text-field.fs-14
-					label Name
-					.row(class="text-field-box")
-						input(type="text",
-							class="pl-0",
-							class="name",
-							placeholder.once="name",
-							id="name",
-							name="name")
+					.row(class = 'text-field-box')
+						input(type = 'text',
+							class = 'pl-0 name',
+							placeholder = 'Name',
+							id = 'name',
+							name = 'name',
+							v-model = 'name')
 			.col-xs-12
 				.text-field.fs-14
-					label Email
-					.row(class="text-field-box")
-						input(type="text",
-							class="pl-0",
-							class="email",
-							placeholder.once="email",
-							id="email",
-							name="email")
+					.row(class = 'text-field-box')
+						input(type = 'text',
+							class = 'pl-0 email',
+							placeholder = 'Email',
+							id = 'email',
+							name = 'email',
+							v-model = 'email')
 			.col-xs-12
 				.text-field.fs-14
-					label Password
-					.row(class="text-field-box")
-						input(type="password",
-							class="pl-0",
-							class="password",
-							placeholder.once="password",
-							id="password",
-							name="password")
+					.row(class = 'text-field-box')
+						input(type = 'password',
+							class = 'pl-0 password',
+							placeholder = 'Password',
+							id = 'password',
+							name = 'password',
+							v-model = 'password')
 			.row.col-sm-12.col-xs-12.center-sm.center-xs
-				button.nw-button(class="login-button")
+				button.nw-button(class='login-button', @click = 'signUp(name, email, password)')
 					| Sign up
