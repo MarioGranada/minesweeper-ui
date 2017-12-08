@@ -3,7 +3,6 @@
     .col-md-base.center-container
       .p-xs.padded-container.mt-s.row.center-sm.center-xs
         .row.col-xs-12
-            mine-sweeper-board
             .col-xs-12
               button(@click = 'saveGame()') Save Game
         .row.col-xs-12.col-sm-12
@@ -36,7 +35,7 @@
 
     },
     backToProfile() {
-
+      this.$router.push({path: '/my-account/' + this.gameData.user_id.$oid});
     }
   };
 
@@ -48,7 +47,7 @@
     methods,
     beforeRouteEnter (to, from, next) {
       request
-      .get(Base.BASE_ENDPOINTS + '/games/' + to.params.id)
+      .get(Base.BASE_ENDPOINTS + '/games/' + to.params.game_id)
       .end((err, res) => {
         next(vm => vm.setData(err, res.body));
       });
