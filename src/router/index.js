@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import MyAccountLogin from './MyAccountLogin.vue'
-import MyAccountRegister from './MyAccountRegister'
-import MyAccountProfile from './MyAccountProfile'
-import MYAccountInGame from './MYAccountInGame'
+import Vue from 'vue';
+import Router from 'vue-router';
+import MyAccountLogin from './MyAccountLogin';
+import MyAccountRegister from './MyAccountRegister';
+import MyAccountProfile from './MyAccountProfile';
+import MyAccountInGame from './MyAccountInGame';
 
 Vue.use(Router)
 
@@ -23,13 +23,13 @@ const account = [
 		title: 'Register'
 	},
 	{
-		path: '/my-account',
+		path: '/my-account/:id',
 		component: MyAccountProfile,
 		title: 'My Profile'
 	},
 	{
 		path: '/my-account/games/:game_id',
-		component: MYAccountInGame,
+		component: MyAccountInGame,
 		title: 'Current Game'
 	}
 ];

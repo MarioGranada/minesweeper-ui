@@ -1,5 +1,5 @@
-import request from 'superagent'
-import Base from '../../services/base'
+import request from 'superagent';
+import Base from '../../services/base';
 
 const methods = {
 	signUp(name, email, password) {
