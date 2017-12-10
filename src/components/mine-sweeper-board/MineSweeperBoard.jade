@@ -1,0 +1,6 @@
+.board-container(:style = '{"max-width": (game.cols * 40)}')
+	.row.board-row.col-xs-12(v-for = '(n, rowIndex) in game.rows')
+		mine-sweeper-cell(v-for = '(m, colIndex) in game.cols'
+			:cell = 'game.cells[(game.cols * rowIndex + colIndex)]'
+			:status = 'game.cells[(game.cols * rowIndex + colIndex)].cell_status'
+			:position-in-array = '(game.cols * rowIndex + colIndex)')

@@ -1,19 +1,23 @@
 <template lang='jade'>
-  .bg-color-light.tablet-padding
-    .col-md-base.center-container
-      .p-xs.padded-container.mt-s.row.center-sm.center-xs
-        .row.col-xs-12
-            .col-xs-12
-              button(@click = 'saveGame()') Save Game
-        .row.col-xs-12.col-sm-12
-          .col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
-            span(@click='backToProfile()') Back
-          .col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
-            span(@click='logOut()') Log out
+.bg-color-light.tablet-padding
+	.col-md-base.center-container
+		.p-xs.padded-container.mt-s.row.center-sm.center-xs
+			.row.col-xs-12
+				mine-sweeper-board(:game = 'gameData')
+				.col-xs-12
+					| Time
+					{{gameData.time}}
+				.col-xs-12
+				button(@click = 'saveGame()') Save Game
+			.row.col-xs-12.col-sm-12
+				.col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
+					span(@click='backToProfile()') Back
+				.col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
+					span(@click='logOut()') Log out
 </template>
 
 <script>
-  import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard'
+  import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard.vue'
   import request from 'superagent';
   import Base from '../services/base';
 

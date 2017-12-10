@@ -7,7 +7,7 @@ const methods = {
 		.get(Base.BASE_ENDPOINTS + '/user_by_email/')
 		.query({email: email})
 		.end((err, res) => {
-			this.$router.push({path: '/my-account/'+res.body._id.$oid});
+			this.$router.push({path: '/my-account/' + res.body._id.$oid});
     	});
 	}
 }
