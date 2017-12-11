@@ -8,7 +8,10 @@
 					| Time
 					{{gameData.time}}
 				.col-xs-12
-				button(@click = 'saveGame()') Save Game
+					| Game Status
+					{{gameData.grid_status}}
+				.col-xs-12
+					button(@click = 'saveGame()') Save Game
 			.row.col-xs-12.col-sm-12
 				.col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
 					span(@click='backToProfile()') Back

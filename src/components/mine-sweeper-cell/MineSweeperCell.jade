@@ -1,1 +1,3 @@
-.cell-box(:class = "{'red-flag': status == 'RED_FLAG', 'covered': status == 'COVERED', 'exploded': status == 'EXPLODED'}")
+.cell-box(:class = 'cellStatusStyleClass'
+	@click = 'updateCell(false)'
+	@contextmenu = 'setRedFlag($event)')
