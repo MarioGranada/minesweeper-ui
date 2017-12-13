@@ -3,7 +3,7 @@
 	.col-md-base.center-container
 		.p-xs.padded-container.mt-s.row.center-sm.center-xs
 			.row.col-xs-12
-				mine-sweeper-board(:game = 'gameData')
+				mine-sweeper-board(:game = 'gameData' @update = "updateGame")
 				.col-xs-12
 					| Time
 					{{gameData.time}}
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard.vue'
+  import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard.vue';
   import request from 'superagent';
   import Base from '../services/base';
 
@@ -40,6 +40,9 @@
     },
     saveGame() {
 
+    },
+    updateGame(newGameData) {
+			this.gameData.grid_status = newGameData.status;
     },
     backToProfile() {
       this.$router.push({path: '/my-account/' + this.gameData.user_id.$oid});

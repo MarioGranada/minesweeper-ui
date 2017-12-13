@@ -1,19 +1,31 @@
 import MineSweeperCell from '../mine-sweeper-cell/MineSweeperCell.vue';
-// import request from 'superagent';
-// import Base from '../../services/base';
 
 const methods = {
-	initGame() {
-
-	}
+	updateGame(newGameData) {
+		var initialRows = this.game.rows;
+    	this.game.cells = newGameData.cells;
+    	this.game.rows = 0;
+    	setTimeout(() => {
+    		this.game.rows = initialRows;
+    	}, 2);
+    	this.$emit('update', newGameData);
+    }
 }
 
 const props = {
 	game: {type: Object}
 }
 
+const data = function () {
+	return {
+		gameData: this.game,
+		rowCounter: 0
+	}
+}
+
 export default {
 	props,
+	data,
 	methods,
 	components: {
 		MineSweeperCell

@@ -22,8 +22,10 @@ const methods = {
 		.query({array_cell_position: arrayCellPosition, cell_status: cellStatus, time: time})
 		.end((err, res) => {
 			var game = res.body;
-			console.log(res.body);
 			this.cellDataStatus = game.cells[arrayCellPosition].cell_status;
+			if (this.cellDataStatus != 'RED_FLAG') {
+				this.$emit('update', {cells : game.cells, status: game.grid_status});
+			}
 		});
 	}
 }
