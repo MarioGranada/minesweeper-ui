@@ -18,8 +18,7 @@ const props = {
 
 const data = function () {
 	return {
-		gameData: this.game,
-		rowCounter: 0
+		gameData: this.game
 	}
 }
 

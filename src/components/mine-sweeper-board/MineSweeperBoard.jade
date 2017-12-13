@@ -1,9 +1,10 @@
 .board-container
-	.row.board-row.col-xs-12(v-for = '(n, rowCounter) in game.rows')
+	.row.board-row.col-xs-12(v-for = '(n, rowIndex) in game.rows')
 		mine-sweeper-cell(v-for = '(m, colIndex) in game.cols'
-			:cell = 'game.cells[(game.cols * rowCounter + colIndex)]'
+			:cell = 'game.cells[(game.cols * rowIndex + colIndex)]'
 			:time = 'game.time'
 			:game-id = 'game._id.$oid'
-			:status = 'game.cells[(game.cols * rowCounter + colIndex)].cell_status'
-			:position-in-array = '(game.cols * rowCounter + colIndex)'
+			:status = 'game.cells[(game.cols * rowIndex + colIndex)].cell_status'
+			:position-in-array = '(game.cols * rowIndex + colIndex)'
+			:position-in-board = '{x: colIndex, y: rowIndex, boardWidth: game.cols, boardHeight: game.rows}'
 			@update = "updateGame")
