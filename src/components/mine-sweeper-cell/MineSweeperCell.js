@@ -9,23 +9,27 @@ const methods = {
 		} else {
 			cellStatusParam = 'UNCOVERED';
 		}
-		this.updateCellRequest(this.positionInArray, cellStatusParam, this.time);
+		this.updateCellRequest(this.positionInArray, cellStatusParam);
 
 	},
 	setRedFlag(e){
 		e.preventDefault();
 		this.updateCell(true);
 	},
-	updateCellRequest(arrayCellPosition, cellStatus, time) {
+	updateCellRequest(arrayCellPosition, cellStatus) {
 		request
 		.post(Base.BASE_ENDPOINTS + '/games/' + this.gameId + '/update_single_cell/')
-		.query({array_cell_position: arrayCellPosition, cell_status: cellStatus, time: time})
+		.query({array_cell_position: arrayCellPosition, cell_status: cellStatus, time: this.time})
 		.end((err, res) => {
 			var game = res.body;
 			this.cellData.status = game.cells[arrayCellPosition].cell_status;
 
 			if (this.cellData.status != 'RED_FLAG') {
-				this.$emit('update', {cells : game.cells, status: game.grid_status});
+				if (this.cellData.status == 'UNCOVERED') {
+					this.updateAdjacentCellsRequest();
+				} else{
+					this.$emit('update', {cells : game.cells, status: game.grid_status});
+				}
 			}
 		});
 	},
@@ -41,21 +45,24 @@ const methods = {
 			{x: this.positionInBoard.x + 1, y: this.positionInBoard.y},
 			{x: this.positionInBoard.x + 1, y: this.positionInBoard.y + 1}
 		];
-		console.log('Board width: '+ this.positionInBoard.boardWidth);
-		console.log('Board height: '+ this.positionInBoard.boardHeight);
 
 		inBoardAdjacentPositions.map(position => {
 			if ((position.x >= 0 && position.x < this.positionInBoard.boardWidth) 
 				&& (position.y >= 0 && position.y < this.positionInBoard.boardHeight)) {
-				console.log("test position:" +position.x + ';' + position.y);
 				adjacentCellsPositions.push((this.positionInBoard.boardWidth * position.y + position.x))
 			}
 		});
-		console.log('adjacent to: ' + this.positionInBoard.x + ';' + this.positionInBoard.y);
-		console.log(adjacentCellsPositions.map(position => position.toString()).join(','));
-		console.log('end adjacent');
 
 		return adjacentCellsPositions.map(position => position.toString()).join(',');
+	},
+	updateAdjacentCellsRequest(){
+		request
+		.post(Base.BASE_ENDPOINTS + '/games/' + this.gameId + '/update_cells_group/')
+		.query({positions_array: this.cellData.adjacentCellsPositions, time: this.time })
+		.end((err, res) => {
+			var game = res.body;
+			this.$emit('update', {cells : game.cells, status: game.grid_status});
+		})
 	}
 }
 
