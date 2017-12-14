@@ -6,10 +6,11 @@
 				mine-sweeper-board(:game = 'gameData' @update = "updateGame")
 				.col-xs-12
 					| Time
-					{{gameData.time}}
+					//- {{gameData.time | moment 'hh:mm:ss'}}
+					{{formatedTime}}
 				.col-xs-12
 					| Game Status
-					{{gameData.grid_status}}
+					{{gameStatus}}
 				.col-xs-12
 					button(@click = 'saveGame()') Save Game
 			.row.col-xs-12.col-sm-12
@@ -20,47 +21,70 @@
 </template>
 
 <script>
-  import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard.vue';
-  import request from 'superagent';
-  import Base from '../services/base';
+import MineSweeperBoard from '../components/mine-sweeper-board/MineSweeperBoard.vue';
+import request from 'superagent';
+import Base from '../services/base';
+import moment from 'moment';
 
-  const data = function(){
-    return {
-      gameData: {}
-    }
-  };
+const data = function () {
+	return {
+		gameData: {}
+	}
+};
 
-  const methods = {
-    setData(err, game) {
-      if (err) {
-        this.error = err.toString();
-      } else {
-        this.gameData = game;
-      }
-    },
-    saveGame() {
+const methods = {
+	setData(err, game) {
+		if (err) {
+			this.error = err.toString();
+		} else {
+			this.gameData = game;
 
-    },
-    updateGame(newGameData) {
-			this.gameData.grid_status = newGameData.status;
-    },
-    backToProfile() {
-      this.$router.push({path: '/my-account/' + this.gameData.user_id.$oid});
-    }
-  };
+			setInterval(() => {
+				this.gameStatus != 'Game Over' ? this.gameData.time += 1000 : clearInterval();
+			}, 1000);
+		}
+	},
+	saveGame() {},
+	updateGame(newGameData) {
+		this.gameData.grid_status = newGameData.status;
+	},
+	backToProfile() {
+		this.$router.push({path: '/my-account/' + this.gameData.user_id.$oid});
+	}
+};
 
-  export default {
-    components: {
-      MineSweeperBoard
-    },
-    data,
-    methods,
-    beforeRouteEnter (to, from, next) {
-      request
-      .get(Base.BASE_ENDPOINTS + '/games/' + to.params.game_id)
-      .end((err, res) => {
-        next(vm => vm.setData(err, res.body));
-      });
-    }
-  }
+export default {
+	components: {
+		MineSweeperBoard
+	},
+	data,
+	methods,
+	beforeRouteEnter (to, from, next) {
+		request
+		.get(Base.BASE_ENDPOINTS + '/games/' + to.params.game_id)
+		.end((err, res) => {
+			next(vm => vm.setData(err, res.body));
+		});
+	},
+	computed: {
+		formatedTime: function () {
+			return moment(this.gameData.time).format("mm:ss");
+		},
+		gameStatus: function () {
+			var status;
+			switch(this.gameData.grid_status) {
+				case 'FINISHED': 
+					status = 'Game Completed';
+					break;
+				case 'OVER':
+					status = 'Game Over';
+					break;
+				default:
+					status = 'In Game';
+			}
+			console.log(status);
+			return status;
+		}
+	}
+}
 </script>

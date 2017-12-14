@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import App from './App';
 import styles from './styles/styles-loader';
-import router from './router'
+import router from './router';
+import moment from 'vue-moment';
 
 Vue.config.productionTip = false
+
+Vue.use(moment);
 
 new Vue({
   el: '#app',

@@ -10,7 +10,6 @@ const methods = {
 			cellStatusParam = 'UNCOVERED';
 		}
 		this.updateCellRequest(this.positionInArray, cellStatusParam);
-
 	},
 	setRedFlag(e){
 		e.preventDefault();
