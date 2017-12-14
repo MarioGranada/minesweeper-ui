@@ -10,6 +10,13 @@
           {{userData.email}}
         .row.mb-xs.col-sm-12.col-xs-12
           button(@click = 'loadGames()') Load Games
+        .row.mb-xs.col-sm-12.col-xs-12
+          button(@click = 'togleNewGameForm()') New Game
+        .row.mb-xs.col-xs-12
+          game-form(:user-id = 'userData._id.$oid'
+            v-if= 'newGame')
+        .row.mb-xs.col-sm-12.col-xs-12
+          button(@click = 'togleNewGameForm()' v-if= 'newGame') Close New Game form
         .row.col-xs-12
           .col-xs-3(v-for = 'game in games')
             .col-xs-12
@@ -23,10 +30,10 @@
               {{game.mines_total}}
             .col-xs-12
               | Status
-              {{game.grid_status}}
+              {{gameStatus(game.grid_status)}}
             .col-xs-12
               | Time
-              {{game.time}}
+              {{formatTime(game.time)}}
             .col-xs-12
               button(@click = 'resumeGame(game)') Start/Resume Game
         .row.col-xs-12.col-sm-12
@@ -37,11 +44,14 @@
 <script>
   import request from 'superagent';
   import Base from '../services/base';
+  import moment from 'moment';
+  import GameForm from '../components/game-form/GameForm.vue';
 
   const data = function(){
     return {
       userData: {},
-      games: []
+      games: [],
+      newGame: false,
     }
   }
 
@@ -53,7 +63,7 @@
       request
       .get(Base.BASE_ENDPOINTS + '/users/' + this.userData._id.$oid + '/games/')
       .end((err, res) => {
-        this.games = res.body;
+        this.games = res.body.reverse();
       });
     },
     setData(err, user) {
@@ -65,10 +75,33 @@
     },
     resumeGame(game) {
       this.$router.push({path: '/my-account/games/' + game._id.$oid});
+    },
+    formatTime(time) {
+      return moment(time).format("mm:ss");
+    },
+    gameStatus(gameStatus) {
+      var status;
+      switch(gameStatus) {
+        case 'FINISHED': 
+          status = 'Game Completed';
+          break;
+        case 'OVER':
+          status = 'Game Over';
+          break;
+        default:
+          status = 'In Game';
+      }
+      return status;
+    },
+    togleNewGameForm(){
+      this.newGame = !this.newGame;
     }
   }
 
   export default {
+    components: {
+      GameForm
+    },
     data,
     methods,
     beforeRouteEnter (to, from, next) {

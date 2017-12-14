@@ -6,7 +6,6 @@
 				mine-sweeper-board(:game = 'gameData' @update = "updateGame")
 				.col-xs-12
 					| Time
-					//- {{gameData.time | moment 'hh:mm:ss'}}
 					{{formatedTime}}
 				.col-xs-12
 					| Game Status
@@ -82,7 +81,6 @@ export default {
 				default:
 					status = 'In Game';
 			}
-			console.log(status);
 			return status;
 		}
 	}
