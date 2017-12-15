@@ -1,44 +1,41 @@
 <template lang='jade'>
-  .bg-color-light.tablet-padding
-    .col-md-base.center-container
-      .p-xs.padded-container.mt-s.row.center-sm.center-xs
-        .row.mb-xs.col-sm-12.col-xs-12
-          | name
-          {{userData.name}}
-        .row.mb-xs.col-sm-12.col-xs-12
-          | Email
-          {{userData.email}}
-        .row.mb-xs.col-sm-12.col-xs-12
-          button(@click = 'loadGames()') Load Games
-        .row.mb-xs.col-sm-12.col-xs-12
-          button(@click = 'togleNewGameForm()') New Game
-        .row.mb-xs.col-xs-12
-          game-form(:user-id = 'userData._id.$oid'
-            v-if= 'newGame')
-        .row.mb-xs.col-sm-12.col-xs-12
-          button(@click = 'togleNewGameForm()' v-if= 'newGame') Close New Game form
-        .row.col-xs-12
-          .col-xs-3(v-for = 'game in games')
-            .col-xs-12
-              | Rows
-              {{game.rows}}
-            .col-xs-12
-              | Columns
-              {{game.cols}}
-            .col-xs-12
-              | Number of mines
-              {{game.mines_total}}
-            .col-xs-12
-              | Status
-              {{gameStatus(game.grid_status)}}
-            .col-xs-12
-              | Time
-              {{formatTime(game.time)}}
-            .col-xs-12
-              button(@click = 'resumeGame(game)') Start/Resume Game
-        .row.col-xs-12.col-sm-12
-          .col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
-            span(@click='logOut()') Log out
+.row.my-account-container
+	.my-account-user-info.col-xs-6
+		.row.col-xs-12
+			| name
+			{{userData.name}}
+		.row.col-xs-12
+			| Email
+			{{userData.email}}
+	.my-account.user-menu.col-xs-6.row.start-xs
+		.col-xs-12
+			button(@click = 'loadGames()') Load Games
+		.col-xs-12(v-if= '!newGame')
+			button(@click = 'togleNewGameForm()') New Game
+		.col-xs-12(v-if= 'newGame'
+			@click = 'togleNewGameForm()') Close New Game form
+		.col-xs-12.my-account-log-out-link.start-xs(@click='logOut()') Log out
+		game-form(:user-id = 'userData._id.$oid'
+			v-if= 'newGame')
+	.row.col-xs-12.game-list-container
+		.col-xs-12.col-md-4.start-xs.game-info-box(v-for = 'game in games')
+			.col-xs-12
+				| Rows
+				{{game.rows}}
+			.col-xs-12
+				| Columns
+				{{game.cols}}
+			.col-xs-12
+				| Number of mines
+				{{game.mines_total}}
+			.col-xs-12
+				| Status
+				{{gameStatus(game.grid_status)}}
+			.col-xs-12
+				| Time
+				{{formatTime(game.time)}}
+			.col-xs-12.center-xs
+				button(@click = 'resumeGame(game)') Start/Resume Game
 </template>
 
 <script>

@@ -2,13 +2,16 @@ import request from 'superagent';
 import Base from '../../services/base';
 
 const methods = {
-	signUp(name, email, password) {
+	signUp() {
 		request
 		.post(Base.BASE_ENDPOINTS + '/users/')
-		.query({name: name, email: email, password: password})
+		.query({name: this.name, email: this.email, password: this.password})
 		.end((err, res) => {
-        	// callback(err, res);
-        	console.log(res.body);
+			if (err) {
+				this.error = err.toString();
+			} else {
+				this.$router.push({path: '/my-account/' + res.body._id.$oid});
+			}
     	});
 	}
 }

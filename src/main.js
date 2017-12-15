@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App';
+import App from './router/Layout.vue';
 import styles from './styles/styles-loader';
 import router from './router';
 import moment from 'vue-moment';

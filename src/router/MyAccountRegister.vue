@@ -1,6 +1,5 @@
 <template lang="jade">
-  .ph-xs.bg-color-light.padded-container.tablet-padding
-    register-content
+register-content
 </template>
 
 <script>

@@ -1,22 +1,18 @@
 <template lang='jade'>
-.bg-color-light.tablet-padding
-	.col-md-base.center-container
-		.p-xs.padded-container.mt-s.row.center-sm.center-xs
-			.row.col-xs-12
-				mine-sweeper-board(:game = 'gameData' @update = "updateGame")
-				.col-xs-12
-					| Time
-					{{formatedTime}}
-				.col-xs-12
-					| Game Status
-					{{gameStatus}}
-				.col-xs-12
-					button(@click = 'saveGame()') Save Game
-			.row.col-xs-12.col-sm-12
-				.col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
-					span(@click='backToProfile()') Back
-				.col-xs-12.text-center.main-color-text.mv-s.fs-12.underline.my-account-log-out-link
-					span(@click='logOut()') Log out
+.game-container.row
+	mine-sweeper-board(:game = 'gameData' @update = "updateGame")
+	.row.col-xs-12.start-xs
+		.col-xs-6
+			| Time
+			{{formatedTime}}
+		.col-xs-6
+			| Game Status
+			{{gameStatus}}
+		.col-xs-3
+			button(@click = 'saveGame()') Save Game
+		.col-xs-3.text-center.my-account-back-link
+			span(@click='backToProfile()') Back
+		.col-xs-3.my-account-log-out-link.start-xs(@click='logOut()') Log out
 </template>
 
 <script>

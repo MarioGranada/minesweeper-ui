@@ -1,33 +1,26 @@
-.login-content.row.center-xs.center-sm
-	.col-md-base
-		.row.center-xs
-			.col-xs-12
-				.text-field.fs-14
-					.row(class = 'text-field-box')
-						input(type = 'text',
-							class = 'pl-0 name',
-							placeholder = 'Name',
-							id = 'name',
-							name = 'name',
-							v-model = 'name')
-			.col-xs-12
-				.text-field.fs-14
-					.row(class = 'text-field-box')
-						input(type = 'text',
-							class = 'pl-0 email',
-							placeholder = 'Email',
-							id = 'email',
-							name = 'email',
-							v-model = 'email')
-			.col-xs-12
-				.text-field.fs-14
-					.row(class = 'text-field-box')
-						input(type = 'password',
-							class = 'pl-0 password',
-							placeholder = 'Password',
-							id = 'password',
-							name = 'password',
-							v-model = 'password')
-			.row.col-sm-12.col-xs-12.center-sm.center-xs
-				button.nw-button(class='login-button', @click = 'signUp(name, email, password)')
-					| Sign up
+section.center-xs.col-xs-12.col-md-6.register-content-container
+	.row.col-xs.center-xs Register your account
+	.center-xs.col-xs-12
+		.col-xs-12.text-field
+			input(type = 'text',
+				class = 'pl-0 name',
+				placeholder = 'Name',
+				id = 'name',
+				name = 'name',
+				v-model = 'name')
+		.col-xs-12.text-field
+			input(v-model = 'email', 
+				class = 'email',
+				placeholder = 'Email',
+				id = 'email',
+				name = 'email'
+				type = 'text')
+		.col-xs-12.text-field
+			input(v-model = 'password',
+				class = 'password',
+				placeholder = 'Password',
+				id = 'password',
+				name = 'password',
+				type = 'password')
+		.row.col-xs-6.buttons-row.center-xs
+			button.register-button(@click='signUp()') Sign Up

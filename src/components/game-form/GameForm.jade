@@ -1,31 +1,21 @@
-.row.center-xs.col-xs-12
-	.col-xs-12
-		.text-field.fs-14
-			label.row(class = 'text-field-box')
-				input(v-model = 'rows', 
-					class = 'rows pl-0',
-					placeholder = 'Rows',
-					id = 'rows',
-					name = 'rows'
-					type = 'number')
-	.col-xs-12
-		.text-field.fs-14
-			label.row(class = 'text-field-box')
-				input(v-model = 'cols', 
-					class = 'cols pl-0',
-					placeholder = 'Columns',
-					id = 'cols',
-					name = 'cols'
-					type = 'number')
-	.col-xs-12
-		.text-field.fs-14
-			label.row(class = 'text-field-box')
-				input(v-model = 'mines', 
-					class = 'mines pl-0',
-					placeholder = 'Number of mines',
-					id = 'mines',
-					name = 'mines'
-					type = 'number')
-	.row.col-sm-12.col-xs-12.center-sm.center-xs
-		button.nw-button(class='create-game-button', @click='createGame()')
-			| Create Game
+.row.start-xs.col-xs-12
+	.col-xs-12.text-field
+		input(v-model = 'rows', 
+			placeholder = 'Rows',
+			id = 'rows',
+			name = 'rows'
+			type = 'number')
+	.col-xs-12.text-field
+		input(v-model = 'cols', 
+			placeholder = 'Columns',
+			id = 'cols',
+			name = 'cols'
+			type = 'number')
+	.col-xs-12.text-field
+		input(v-model = 'mines', 
+			placeholder = 'Number of mines',
+			id = 'mines',
+			name = 'mines'
+			type = 'number')
+	.col-xs-12.start-xs
+		button.create-game-button(@click='createGame()') Create Game
