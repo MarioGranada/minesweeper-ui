@@ -1,5 +1,5 @@
 section.center-xs.col-xs-12.col-md-6.login-content-container
-	.row.col-xs.center-xs Log in to your account
+	.col-xs-12.center-xs Log in to your account
 	.center-xs.col-xs-12
 		.col-xs-12.text-field
 			input(v-model = 'email', 
@@ -16,8 +16,8 @@ section.center-xs.col-xs-12.col-md-6.login-content-container
 				name = 'password',
 				type = 'password')
 		.row.col-xs-6.buttons-row
-			.col-xs-6
+			.col-xs-12.col-md-6
 				button.login-button(@click='signIn()') Sign in
-			.col-xs-6
+			.col-xs-12.col-md-6
 				button.register-button(@click='signUp()') Sign Up
 		.row.col-xs-12.center-xs.forgot-password.my-account-link Forgot password?
