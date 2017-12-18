@@ -1,4 +1,4 @@
-.row.start-xs.col-xs-12
+.row.start-xs.col-xs-12.game-form-container
 	.col-xs-12.text-field
 		input(v-model = 'rows', 
 			placeholder = 'Rows',
@@ -17,5 +17,8 @@
 			id = 'mines',
 			name = 'mines'
 			type = 'number')
-	.col-xs-12.start-xs
-		button.create-game-button(@click='createGame()') Create Game
+	.row.col-xs-12
+		.col-xs-4
+			button.create-game-button(@click='createGame()') Create Game
+		.col-xs-4
+			button(@click = 'closeForm()') Cancel

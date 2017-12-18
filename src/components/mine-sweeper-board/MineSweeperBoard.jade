@@ -4,6 +4,7 @@
 			:cell = 'game.cells[(game.cols * rowIndex + colIndex)]'
 			:time = 'game.time'
 			:game-id = 'game._id.$oid'
+			:game-status = 'game.grid_status'
 			:status = 'game.cells[(game.cols * rowIndex + colIndex)].cell_status'
 			:position-in-array = '(game.cols * rowIndex + colIndex)'
 			:position-in-board = '{x: colIndex, y: rowIndex, boardWidth: game.cols, boardHeight: game.rows}'

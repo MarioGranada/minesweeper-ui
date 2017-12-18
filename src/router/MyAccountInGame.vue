@@ -1,18 +1,18 @@
 <template lang='jade'>
 .game-container.row
+	.congrats-title.fs-bold.center-xs.col-xs-12(v-if = "gameStatus == 'Game Completed'") Congratulations, You have Won!!!
 	mine-sweeper-board(:game = 'gameData' @update = "updateGame")
-	.row.col-xs-12.start-xs
-		.col-xs-6
-			| Time
+	.row.col-xs-12.center-xs
+		.col-xs-12.col-md-3
+			span.fs-bold Time
 			{{formatedTime}}
-		.col-xs-6
-			| Game Status
+		.col-xs-12.col-md-3
+			span.fs-bold Game Status
 			{{gameStatus}}
-		.col-xs-3
-			button(@click = 'saveGame()') Save Game
-		.col-xs-3.text-center.my-account-back-link
-			span(@click='backToProfile()') Back
-		.col-xs-3.my-account-log-out-link.start-xs(@click='logOut()') Log out
+		.col-xs-12.col-md-3.text-center.my-account-link
+			span(@click='backToProfile()') < Back
+		.col-xs-12.col-md-3.center-xs.start-md
+			button(@click='logOut()') Log out
 </template>
 
 <script>
@@ -35,11 +35,13 @@ const methods = {
 			this.gameData = game;
 
 			setInterval(() => {
-				this.gameStatus != 'Game Over' ? this.gameData.time += 1000 : clearInterval();
+				this.gameStatus == 'Game Over' || this.gameStatus == 'Game Completed' ? clearInterval() : this.gameData.time += 1000;
 			}, 1000);
 		}
 	},
-	saveGame() {},
+	logOut() {
+      this.$router.push({path: '/'});
+    },
 	updateGame(newGameData) {
 		this.gameData.grid_status = newGameData.status;
 	},

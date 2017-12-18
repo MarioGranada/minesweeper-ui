@@ -4,10 +4,13 @@ const methods = {
 	updateGame(newGameData) {
 		var initialRows = this.game.rows;
     	this.game.cells = newGameData.cells;
-    	this.game.rows = 0;
-    	setTimeout(() => {
-    		this.game.rows = initialRows;
-    	}, 2);
+
+    	if (!newGameData.isRedFlag) {
+    		this.game.rows = 0;
+    		setTimeout(() => {
+    			this.game.rows = initialRows;
+    		}, 2);
+    	}
     	this.$emit('update', newGameData);
     }
 }

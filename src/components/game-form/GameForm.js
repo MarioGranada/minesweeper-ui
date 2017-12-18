@@ -9,6 +9,9 @@ const methods = {
 		.end((err, res) => {
 			this.$router.push({path: '/my-account/games/' +  res.body._id.$oid});
     	});
+	},
+	closeForm() {
+		this.$emit('update');
 	}
 }
 
@@ -21,7 +24,8 @@ const data = function () {
 }
 
 const props = {
-	userId: {type: String}
+	userId: {type: String},
+	show: {type: Boolean}
 }
 
 export default {

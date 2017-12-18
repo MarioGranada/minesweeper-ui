@@ -4,12 +4,14 @@ import Base from '../../services/base';
 const methods = {
 	updateCell(isRedFlag) {
 		var cellStatusParam;
-		if (isRedFlag) {
-			cellStatusParam = 'RED_FLAG';
-		} else {
-			cellStatusParam = 'UNCOVERED';
+		if (this.gameStatus == 'IN_GAME') {
+			if (isRedFlag) {
+				cellStatusParam = 'RED_FLAG';
+			} else {
+				cellStatusParam = 'UNCOVERED';
+			}
+			this.updateCellRequest(this.positionInArray, cellStatusParam);
 		}
-		this.updateCellRequest(this.positionInArray, cellStatusParam);
 	},
 	setRedFlag(e){
 		e.preventDefault();
@@ -27,8 +29,10 @@ const methods = {
 				if (this.cellData.status == 'UNCOVERED') {
 					this.updateAdjacentCellsRequest();
 				} else{
-					this.$emit('update', {cells : game.cells, status: game.grid_status});
+					this.$emit('update', {cells : game.cells, status: game.grid_status, isRedFlag: false});
 				}
+			} else{
+					this.$emit('update', {cells : game.cells, status: game.grid_status, isRedFlag: true});
 			}
 		});
 	},
@@ -60,13 +64,14 @@ const methods = {
 		.query({positions_array: this.cellData.adjacentCellsPositions, time: this.time })
 		.end((err, res) => {
 			var game = res.body;
-			this.$emit('update', {cells : game.cells, status: game.grid_status});
+			this.$emit('update', {cells : game.cells, status: game.grid_status, isRedFlag: false});
 		})
 	}
 }
 
 const props = {
 	status: {type: String},
+	gameStatus: {type: String},
 	positionInArray: {type: Number},
 	positionInBoard: {type: Object},
 	cell: {type: Object},

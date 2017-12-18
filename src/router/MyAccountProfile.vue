@@ -1,22 +1,22 @@
 <template lang='jade'>
 .row.my-account-container
-	.my-account-user-info.col-xs-6
-		.row.col-xs-12
-			| name
+	.my-account-user-info.col-xs-12.col-md-6.start-xs
+		.col-xs-12
+			span.fs-bold Name
 			{{userData.name}}
-		.row.col-xs-12
-			| Email
+		.col-xs-12
+			span.fs-bold Email
 			{{userData.email}}
-	.my-account.user-menu.col-xs-6.row.start-xs
 		.col-xs-12
 			button(@click = 'loadGames()') Load Games
+		.col-xs-12.my-account-link.start-xs(@click='logOut()') Log out
+	.my-account.user-menu.col-xs-12.col-md-6.row.start-xs
 		.col-xs-12(v-if= '!newGame')
 			button(@click = 'togleNewGameForm()') New Game
-		.col-xs-12(v-if= 'newGame'
-			@click = 'togleNewGameForm()') Close New Game form
-		.col-xs-12.my-account-log-out-link.start-xs(@click='logOut()') Log out
 		game-form(:user-id = 'userData._id.$oid'
-			v-if= 'newGame')
+			:show = 'newGame'
+			v-if= 'newGame'
+			@update = 'togleNewGameForm')
 	.row.col-xs-12.game-list-container
 		.col-xs-12.col-md-4.start-xs.game-info-box(v-for = 'game in games')
 			.col-xs-12
