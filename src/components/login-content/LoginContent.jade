@@ -1,23 +1,27 @@
 section.center-xs.col-xs-12.col-md-6.login-content-container
 	.col-xs-12.center-xs Log in to your account
-	.center-xs.col-xs-12
-		.col-xs-12.text-field
-			input(v-model = 'email', 
-				class = 'email',
-				placeholder = 'Email',
-				id = 'email',
+	form.center-xs.col-xs-12(@submit.prevent="beforeSubmit")
+		.col-xs-12.text-field.control(:class ="{'has-error': errors.has('email') }")
+			input(v-model = 'email' 
+				class = 'email form-control'
+				placeholder = 'Email'
+				id = 'email'
 				name = 'email'
-				type = 'text')
-		.col-xs-12.text-field
-			input(v-model = 'password',
-				class = 'password',
-				placeholder = 'Password',
-				id = 'password',
-				name = 'password',
-				type = 'password')
+				type = 'text'
+				v-validate:email="{ rules: 'required|email' }")
+			p.text-danger(v-if = "errors.has('email')") {{ errors.first('email') }}
+		.col-xs-12.text-field.control(:class ="{'has-error': errors.has('password') }")
+			input(v-model = 'password'
+				class = 'password'
+				placeholder = 'Password'
+				id = 'password'
+				name = 'password'
+				type = 'password'
+				v-validate:password="{ rules: 'required' }")
+			p.text-danger(v-if = "errors.has('password')") {{ errors.first('password') }}
 		.row.col-xs-6.buttons-row
-			.col-xs-12.col-md-6
-				button.login-button(@click='signIn()') Sign in
+			.col-xs-12.col-md-6.control
+				button.login-button(type = 'submit') Sign in
 			.col-xs-12.col-md-6
 				button.register-button(@click='signUp()') Sign Up
 		.row.col-xs-12.center-xs.forgot-password.my-account-link Forgot password?

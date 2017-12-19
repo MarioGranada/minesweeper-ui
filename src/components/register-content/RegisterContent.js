@@ -13,7 +13,14 @@ const methods = {
 				this.$router.push({path: '/my-account/' + res.body._id.$oid});
 			}
     	});
-	}
+	},
+	beforeSubmit() {
+		this.$validator.validateAll().then((result) => {
+			if (result) {
+				this.signUp();
+			}
+		});
+    }
 }
 
 const data = function () {

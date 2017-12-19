@@ -10,7 +10,7 @@
 		.col-xs-12
 			button(@click = 'loadGames()') Load Games
 		.col-xs-12.my-account-link.start-xs(@click='logOut()') Log out
-	.my-account.user-menu.col-xs-12.col-md-6.row.start-xs
+	.my-account.user-menu.col-xs-12.col-md-6.start-xs
 		.col-xs-12(v-if= '!newGame')
 			button(@click = 'togleNewGameForm()') New Game
 		game-form(:user-id = 'userData._id.$oid'

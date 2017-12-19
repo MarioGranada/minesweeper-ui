@@ -12,7 +12,14 @@ const methods = {
 	},
 	closeForm() {
 		this.$emit('update');
-	}
+	},
+	beforeSubmit() {
+		this.$validator.validateAll().then((result) => {
+			if (result) {
+				this.createGame();
+			}
+		});
+    }
 }
 
 const data = function () {

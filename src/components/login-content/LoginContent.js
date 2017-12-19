@@ -12,7 +12,14 @@ const methods = {
 	},
 	signUp() {
 		this.$router.push({path: '/register/'});
-	}
+	},
+	beforeSubmit() {
+		this.$validator.validateAll().then((result) => {
+			if (result) {
+				this.signIn();
+			}
+		});
+    }
 }
 
 const data = function () {
