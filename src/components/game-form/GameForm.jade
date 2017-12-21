@@ -1,0 +1,30 @@
+form.row.start-xs.col-xs-12.game-form-container(@submit.prevent="beforeSubmit")
+	.col-xs-12.text-field.form-group(:class ="{'has-error': errors.has('rows') }")
+		input(v-model = 'rows', 
+			placeholder = 'Rows',
+			id = 'rows',
+			name = 'rows'
+			type = 'number'
+			v-validate:rows="{ rules: 'required|numeric' }")
+		p.text-danger(v-if = "errors.has('rows')") {{ errors.first('rows') }}
+	.col-xs-12.text-field.form-group(:class ="{'has-error': errors.has('cols') }")
+		input(v-model = 'cols', 
+			placeholder = 'Columns',
+			id = 'cols',
+			name = 'cols'
+			type = 'number'
+			v-validate:cols="{ rules: 'required|numeric' }")
+		p.text-danger(v-if = "errors.has('cols')") {{ errors.first('cols') }}
+	.col-xs-12.text-field.form-group(:class ="{'has-error': errors.has('mines') }")
+		input(v-model = 'mines', 
+			placeholder = 'Number of mines',
+			id = 'mines',
+			name = 'mines'
+			type = 'number'
+			v-validate:mines="{ rules: 'required|numeric' }")
+		p.text-danger(v-if = "errors.has('mines')") {{ errors.first('mines') }}
+	.row.col-xs-12
+		.col-xs-4
+			button.create-game-button(type = 'submit') Create Game
+		.col-xs-4
+			button(@click = 'closeForm()') Cancel

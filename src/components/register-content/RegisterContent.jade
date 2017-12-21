@@ -1,0 +1,32 @@
+section.center-xs.col-xs-12.col-md-6.register-content-container
+	.center-xs Register your account
+	form.center-xs.col-xs-12(@submit.prevent="beforeSubmit")
+		.col-xs-12.text-field.control(:class ="{'has-error': errors.has('name') }")
+			input(type = 'text',
+				class = 'pl-0 name',
+				placeholder = 'Name',
+				id = 'name',
+				name = 'name',
+				v-model = 'name'
+				v-validate:name="{ rules: 'required' }")
+			p.text-danger(v-if = "errors.has('name')") {{ errors.first('name') }}
+		.col-xs-12.text-field.control(:class ="{'has-error': errors.has('email') }")
+			input(v-model = 'email', 
+				class = 'email',
+				placeholder = 'Email',
+				id = 'email',
+				name = 'email'
+				type = 'text'
+				v-validate:email="{ rules: 'required|email' }")
+			p.text-danger(v-if = "errors.has('email')") {{ errors.first('email') }}
+		.col-xs-12.text-field.control(:class ="{'has-error': errors.has('password') }")
+			input(v-model = 'password',
+				class = 'password',
+				placeholder = 'Password',
+				id = 'password',
+				name = 'password',
+				type = 'password'
+				v-validate:password="{ rules: 'required' }")
+			p.text-danger(v-if = "errors.has('password')") {{ errors.first('password') }}
+		.row.col-xs-6.buttons-row.center-xs
+			button.register-button(type = 'submit') Sign Up
